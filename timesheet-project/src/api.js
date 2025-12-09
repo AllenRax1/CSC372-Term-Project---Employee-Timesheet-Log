@@ -1,5 +1,5 @@
 //this is the base URL for the API endpoints.
-const BASE = 'http://localhost:3000';
+const BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 const ENTRIES_URL = `${BASE}/api/entries`;
 const AUTH_URL = `${BASE}/api/auth`;
 const QUOTES_URL = `${BASE}/api/quotes`;
