@@ -57,7 +57,7 @@ useEffect(() => {
         });
       });
   }
-})
+}, [user])
 
 const handleLogin = async (e) => {
   e.preventDefault();

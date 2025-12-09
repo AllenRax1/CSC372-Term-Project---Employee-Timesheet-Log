@@ -1,4 +1,5 @@
 //this is the base URL for the API endpoints.
+//const base is importing the url in the .env which is also on render
 const BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
 const ENTRIES_URL = `${BASE}/api/entries`;
 const AUTH_URL = `${BASE}/api/auth`;
@@ -51,7 +52,9 @@ export async function getCurrentUser() {
 }
 
 export async function fetchQuote() {
-  const res = await fetch(QUOTES_URL);
+  const res = await fetch(QUOTES_URL, {
+    credentials: 'include'
+  });
   if (!res.ok) throw new Error('Failed to fetch quote');
   return res.json();
 }
