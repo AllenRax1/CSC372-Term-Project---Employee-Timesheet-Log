@@ -8,6 +8,7 @@ const requireAuth = (req, res, next) => {
   next();
 };
 
+//this gets all the entries for the logged in user.
 exports.getAllEntries = [requireAuth, async (req, res, next) => {
   try {
     const entries = await Entry.getAll(req.session.userId);
@@ -17,6 +18,7 @@ exports.getAllEntries = [requireAuth, async (req, res, next) => {
   }
 }];
 
+//this creates a new entry for the logged in person.
 exports.createEntry = [requireAuth, async (req, res, next) => {
   try {
     const { date, clockIn, clockOut } = req.body;
@@ -34,7 +36,7 @@ exports.createEntry = [requireAuth, async (req, res, next) => {
     next(err);
   }
 }];
-
+//This is the function that updates an existing entry.
 exports.updateEntry = [requireAuth, async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -61,7 +63,7 @@ exports.updateEntry = [requireAuth, async (req, res, next) => {
     next(err);
   }
 }];
-
+//this is the controller function that deletes the entry.
 exports.deleteEntry = [requireAuth, async (req, res, next) => {
   try {
     const { id } = req.params;

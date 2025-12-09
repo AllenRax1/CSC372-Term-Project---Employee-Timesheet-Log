@@ -44,6 +44,7 @@ useEffect(() => {
   }
 }, [user]);
 
+//the useEffect for fetching quotes when user is logged in.
 useEffect(() => {
   if (user) {
     fetchQuote()
@@ -59,6 +60,7 @@ useEffect(() => {
   }
 }, [user])
 
+//the function that handles login.
 const handleLogin = async (e) => {
   e.preventDefault();
   setError('');
@@ -72,6 +74,7 @@ const handleLogin = async (e) => {
   }
 };
 
+//the function that handles registration
 const handleRegister = async (e) => {
   e.preventDefault();
   setError('');
@@ -86,6 +89,7 @@ const handleRegister = async (e) => {
   }
 };
 
+//the function that handles logout.
 const handleLogout = async () => {
   try {
     await logout();
@@ -126,7 +130,7 @@ const updateEntryHandler = async (updatedEntry) => {
   }
 };
 
-//this will be a future implementation for deleting entries.
+//this is a fully implemented function for deleting entries.
 const deleteEntryHandler = async (id) => {
   try {
     await deleteEntry(id);
@@ -137,7 +141,7 @@ const deleteEntryHandler = async (id) => {
   }
 };
 
-//this will be a future implementation for editing an entry.
+//this is a fully implemented function for editing entries.
 const editEntry = (entry) => {
   setEntryToEdit(entry);
 };
@@ -187,6 +191,7 @@ const editEntry = (entry) => {
     );
   }
 
+  // Main app UI when logged in
   return (
     <div className = "container">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
@@ -205,6 +210,7 @@ const editEntry = (entry) => {
         </div>
       )}
 
+      {/*The UserTimesheet component that allows adding entries, and the TimeSheetTable component that shows all entries.*/}
       <UserTimesheet onAdd = {addEntry} onUpdate = {updateEntryHandler} entryToEdit = {entryToEdit} />
       <TimeSheetTable entries = {entries} onEdit = {editEntry} onDelete = {deleteEntryHandler} />
     </div>

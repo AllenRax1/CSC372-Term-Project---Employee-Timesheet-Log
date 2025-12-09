@@ -20,6 +20,8 @@ export async function register(username, password) {
   return res.json();
 }
 
+
+//this function handles loggin in a user with a post request
 export async function login(username, password) {
   const res = await fetch(`${AUTH_URL}/login`, {
     method: 'POST',
@@ -34,6 +36,7 @@ export async function login(username, password) {
   return res.json();
 }
 
+//this function handles the logout feature.
 export async function logout() {
   const res = await fetch(`${AUTH_URL}/logout`, {
     method: 'POST',
@@ -43,6 +46,8 @@ export async function logout() {
   return res.json();
 }
 
+
+//this function gets the current logged in user.
 export async function getCurrentUser() {
   const res = await fetch(`${AUTH_URL}/user`, {
     credentials: 'include'
@@ -51,6 +56,8 @@ export async function getCurrentUser() {
   return res.json();
 }
 
+
+//this function fetches the QOTD from the third party API.
 export async function fetchQuote() {
   const res = await fetch(QUOTES_URL, {
     credentials: 'include'

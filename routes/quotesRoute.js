@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+
+//the route that gets a daily quote from the api ninjas service. theres is a limit of 3000 requests per month.
 router.get('/', async (req, res) => {
   try {
     const response = await fetch('https://api.api-ninjas.com/v2/quoteoftheday?category=happiness', {
