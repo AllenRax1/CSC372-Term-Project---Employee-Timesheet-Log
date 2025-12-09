@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 require('dotenv').config();
 const app = express();
 const cors = require('cors');
@@ -39,14 +38,6 @@ app.use(session({
 app.use('/api/auth', authRouter);
 app.use('/api/entries', entriesRouter);
 app.use('/api/quotes', quotesRouter);
-
-// Serve static files from Vite build
-app.use(express.static(path.join(__dirname, 'timesheet-project/dist')));
-
-// Fallback to index.html for SPA
-app.get(/.*/, (req, res) => {
-  res.sendFile(path.join(__dirname, 'timesheet-project/dist/index.html'));
-});
 
 app.use((err, req, res, next) => {
   console.error(err);
