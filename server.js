@@ -28,14 +28,13 @@ app.use(session({
   }),
   secret: process.env.SESSION_SECRET || 'simple-secret',
   resave: false,
-  saveUninitialized: false,
+  saveUninitialized: true,
   name: 'sessionId',
   cookie: {
-    secure: process.env.NODE_ENV === 'production',
+    secure: true,
     httpOnly: true,
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
-    maxAge: 24 * 60 * 60 * 1000,
-    domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : 'localhost'
+    sameSite: 'none',
+    maxAge: 24 * 60 * 60 * 1000
   }
 }));
 
