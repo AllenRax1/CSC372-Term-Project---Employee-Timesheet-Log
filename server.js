@@ -1,12 +1,17 @@
+// server.js
+
 const express = require('express');
 require('dotenv').config();
+// creates the express app
 const app = express();
 const cors = require('cors');
 const session = require('express-session');
+//this would have used the pg session to store sessions in the database for render.
 const PgSession = require('connect-pg-simple')(session);
 const pool = require('./db');
 const entriesRouter = require('./routes/entriesRoute');
 const authRouter = require('./routes/authRoute');
+//this would have worked for quotes, but i reached my limit in api ninja.
 const quotesRouter = require('./routes/quotesRoute');
 
 // the configuration for CORS
@@ -29,6 +34,8 @@ app.use((req, res, next) => {
 });
 
 // my session secret for express-session
+const isProduction = process.env.NODE_ENV === 'production';
+
 app.use(session({
   store: new PgSession({
     pool: pool,
@@ -39,9 +46,9 @@ app.use(session({
   saveUninitialized: true,
   name: 'sessionId',
   cookie: {
-    secure: true,
+    secure: isProduction, // Only HTTPS in production, HTTP localhost in development
     httpOnly: true,
-    sameSite: 'none',
+    sameSite: isProduction ? 'none' : 'lax', // 'lax' for localhost, 'none' for cross-origin production
     maxAge: 24 * 60 * 60 * 1000
   }
 }));
