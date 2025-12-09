@@ -12,7 +12,9 @@ const quotesRouter = require('./routes/quotesRoute');
 // the configuration for CORS
 app.use(cors({
   origin: process.env.CLIENT_BASE_URL || 'http://localhost:5173',
-  credentials: true
+  credentials: true,
+  allowedHeaders: ['Content-Type'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 
 app.use(express.json());
@@ -27,6 +29,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'simple-secret',
   resave: false,
   saveUninitialized: false,
+  name: 'sessionId',
   cookie: {
     secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
