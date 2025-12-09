@@ -71,10 +71,18 @@ router.post('/login', async (req, res, next) => {
     // Store user in session
     req.session.userId = user.id;
     req.session.username = user.username;
-
-    res.json({
-      id: user.id,
-      username: user.username
+    
+    // Save session and log
+    req.session.save((err) => {
+      if (err) {
+        console.error('Session save error:', err);
+        return res.status(500).json({ error: 'Session save failed' });
+      }
+      console.log('Session saved successfully:', req.sessionID);
+      res.json({
+        id: user.id,
+        username: user.username
+      });
     });
   } catch (err) {
     next(err);
